@@ -11,42 +11,42 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         main.read();
-        main.reverseString();
+        main.reverse();
         main.print();
         main.scanner.close();
     }
 
     public void read() {
-        System.out.println("Enter a string :");
+        System.out.print("Enter a string: ");
         data = new StringBuilder(scanner.nextLine());
     }
 
     public void print() {
-        if (data == null) {
-            System.out.println("The string is null.");
-            return;
-        }
-        System.out.println("After reversing, the string is: ");
+        System.out.print("After reversing, the string is: ");
         System.out.println(data);
     }
 
-    public void reverseString() {
-        if (data == null)  {
-            return;
-        }
-        int size = data.length();
+    private void swap(int left, int right) {
+        final char temp = data.charAt(left);
+        data.setCharAt(left, data.charAt(right));
+        data.setCharAt(right, temp);
+    }
 
+    public void reverse() {
+        final int size = data.length();
+
+        // do not reverse when the string is empty or has only one character.
         if (size <= 1) {
             return;
         }
 
+        // init the left and right pointers
         int left = 0;
         int right = size - 1;
 
+        // ensure the pointers do not cross
         while (left < right) {
-            char temp = data.charAt(left);
-            data.setCharAt(left, data.charAt(right));
-            data.setCharAt(right, temp);
+            swap(left, right);
             left++;
             right--;
         }
